@@ -1,0 +1,21 @@
+div
+{
+    width: 50%;
+    left: 25%;
+    top: 25%;
+    text-align: center;
+    position: relative;
+}
+h1
+{
+    font-size: 60px;
+}
+h2
+{
+    font-size: 30px;
+}
+body {
+    background-image: url("../images/dontTouch.jpg");
+    background-repeat: no-repeat;
+    background-size: cover; 
+}
