@@ -13,7 +13,7 @@
         <!-- טבלת המובילים תיווצר כאן -->
     </div>
     <script>
-        let username="moshe";
+        let username  = localStorage.getItem("currentUser");
         showUserData();
         showLeaderboard();
         function showUserData() {
@@ -22,16 +22,17 @@
             var lastPlayed = userData.lastPlayed || 'N/A';
             var highestScore = userData.highestScore || 'N/A';
 
-            document.getElementById('userData').innerHTML = '<h2 style="color: black;">' + username + ' Data</h2>' +
+            document.getElementById("userData").innerHTML = '<h2 style="color: black;">' + username + ' Data</h2>' +
                 '<p>Plays: ' + plays + '</p>' +
                 '<p>Last Played: ' + lastPlayed + '</p>' +
                 '<p>Highest Score: ' + highestScore + '</p>';
         }
         function showLeaderboard() {
             // קבלת כל הנתונים מה local storage
-            var allUserData = Object.keys(localStorage).map(function(key) {
-                return JSON.parse(localStorage.getItem(key));
-            });
+            let allUserData;
+            for (var i = 0; i < localStorage.length; i++) {
+        allUserData.push({username: localStorage.getItem(username), highestScore: localStorage.getItem(highestScore) })
+    }
 
             // מיון הנתונים לפי הניקוד הגבוה ביותר
             allUserData.sort(function(a, b) {
@@ -51,11 +52,3 @@
     </script>
 </body>
 </html>
-
- 
-
- 
-      
-  
-
-   

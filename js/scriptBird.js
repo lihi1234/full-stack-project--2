@@ -93,8 +93,9 @@ function moveBird(side) {
        
     }
 }
+localStorage.removeItem("ddd");
+let username  = localStorage.getItem("currentUser");
 //localStorage.setItem("naama", JSON.stringify({ username: "naama" ,password :"897"}));
-let username = "Lea", password = "234";
 // End game function
 function endGame() {
     clearInterval(intervalLeft);
@@ -114,12 +115,11 @@ function endGame() {
     if (!userStats.hasOwnProperty('plays')) {
         userStats.plays=0;
         userStats.highestScore=0;
-        console.log("imin");
-
     }
         //Update user statistics
     userStats.plays++;
     userStats.highestScore = Math.max(userStats.highestScore, score);
+    console.log("wowwww  "+userStats.highestScore);
 
    
 

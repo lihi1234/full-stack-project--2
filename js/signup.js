@@ -38,8 +38,17 @@ function validateForm() {
     }
 
     // Additional validation checks (you can customize this part based on your requirements)
+    localStorage.setItem(username, JSON.stringify({ username: username ,password :password}));
 
     // If all validation passes, you can submit the form or perform other actions
     alert('Sign up successful!\nUsername: ' + username + '\nEmail: ' + email + '\nPhone: ' + phone);
-    // You might want to send data to a server using AJAX at this point
+
+}
+printLocalStorage();
+function printLocalStorage() {
+    for (var i = 0; i < localStorage.length; i++) {
+        var key = localStorage.key(i);
+        var value = localStorage.getItem(key);
+        console.log(key + ': ' + value);
+    }
 }
