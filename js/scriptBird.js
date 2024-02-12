@@ -84,32 +84,61 @@ function moveBird(side) {
                 sidee="left";
                 intervalLeft=setInterval(() => moveBird("left"), 50);
                 bird.style.transform = 'rotateY(0deg)';//We will turn the bird over
-            }
-            if(level%2==0&&fallSpeed<5)//Every 2 steps the speed increases
-            {
-                fallSpeed+=0.25;
-            }       
+                if(level%2!=0&&fallSpeed<5)//Every 2 steps the speed increases
+                {
+                    fallSpeed+=0.25;
+                }   
+            }    
         }
        
     }
 }
-//End game function
+//localStorage.setItem("naama", JSON.stringify({ username: "naama" ,password :"897"}));
+let username = "Lea", password = "234";
+// End game function
 function endGame() {
     clearInterval(intervalLeft);
     clearInterval(intervalRight);
     clearInterval(check);
-    message.innerHTML = `Game Over! Your score: ${score} <br> Press any key to start again`;//Printing the stage you reached and a new start
+    message.innerHTML = `Game Over! Your score: ${score} <br> Press any key to start again`; //Printing the stage you reached and a new start
     message.style.display = 'block';
     isGameStarted = false;
-    level=1;//initialize the level value
-    score = 0;//initialize the score value
-    fallSpeed=3;//initialize the fallSpeed value
+    level = 1; //initialize the level value
+    fallSpeed = 3; //initialize the fallSpeed value
+
+    // Retrieve user statistics from local storage or set default values
+   // var username = document.getElementById('username').value;
+   // var userStats = JSON.parse(localStorage.getItem(username)) || { plays: 0, lastPlayed: null, highestScore: 0 };
+    var userStats = JSON.parse(localStorage.getItem(username)) || {};
+    userStats.lastPlayed = new Date().toLocaleString();
+    if (!userStats.hasOwnProperty('plays')) {
+        userStats.plays=0;
+        userStats.highestScore=0;
+        console.log("imin");
+
+    }
+        //Update user statistics
+    userStats.plays++;
+    userStats.highestScore = Math.max(userStats.highestScore, score);
+
+   
+
+    // Save updated user statistics to local storage
+    localStorage.setItem(username, JSON.stringify(userStats));
+
+    // Update score display
     scoreDisplay.textContent = score;
-    levelDisplay.textContent=level;
+
+    // Reset bird position
     bird.style.top = '50%';
-    bird.style.left ='50px';
+    bird.style.left = '50px';
+    printLocalStorage();
+
 }
 
+
+
+   
 //A function to create the spikes in the walls
 function createSpikes(className, side) {
     for (let i=0; i < numSpikes; i++) {
@@ -127,6 +156,16 @@ function spikes() {
     candy.classList.add("candies");
     gameContainer.appendChild(candy);
 }
+    
+   // הגדרת מערך ריק לשמירת מיקומי הפצצות
+   var bombs = [];
+   for (var i = 0; i < 5; i++) {
+   var bombElement = document.createElement('div');
+   bombElement.className = 'bomb';
+   bombElement.style.position = 'absolute';
+   bombs.push(bombElement);
+   gameContainer.appendChild(bombElement);
+   }
 
 //A function that determines which of the spikes will appear on the left wall
 function generateSpikes(className) {
@@ -151,18 +190,6 @@ function generateSpikes(className) {
     {
         flag=false;
     }
-}
-
-
-// הגדרת מערך ריק לשמירת מיקומי הפצצות
-var bombs = [];
-for (var i = 0; i < 5; i++) {
-    var bombElement = document.createElement('div');
-    bombElement.className = 'bomb';
-    bombElement.style.position = 'absolute';
-    bombs.push(bombElement);
-    gameContainer.appendChild(bombElement);
-
 }
 
 
@@ -294,3 +321,13 @@ function checkCollision() {
         isPaused = !isPaused;
     }
    
+    // הדפסת כל המשתנים שנשמרו ב-LocalStorage
+function printLocalStorage() {
+    for (var i = 0; i < localStorage.length; i++) {
+        var key = localStorage.key(i);
+        var value = localStorage.getItem(key);
+        console.log(key + ': ' + value);
+    }
+}
+
+// קריאה לפונקציה להדפסת הנתונים ב-LocalStorage
