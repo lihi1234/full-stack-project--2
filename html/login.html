@@ -78,6 +78,7 @@
 
             // Check if the entered password matches the stored password
             if (password === userData.password) {
+                localStorage.setItem("currentUser", username);
                 alert('Login successful!');
                 // You can redirect to another page or perform additional actions here
             } else {
