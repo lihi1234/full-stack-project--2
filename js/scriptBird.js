@@ -107,9 +107,6 @@ function endGame() {
     level = 1; //initialize the level value
     fallSpeed = 3; //initialize the fallSpeed value
 
-    // Retrieve user statistics from local storage or set default values
-   // var username = document.getElementById('username').value;
-   // var userStats = JSON.parse(localStorage.getItem(username)) || { plays: 0, lastPlayed: null, highestScore: 0 };
     var userStats = JSON.parse(localStorage.getItem(username)) || {};
     userStats.lastPlayed = new Date().toLocaleString();
     if (!userStats.hasOwnProperty('plays')) {
@@ -119,8 +116,6 @@ function endGame() {
         //Update user statistics
     userStats.plays++;
     userStats.highestScore = Math.max(userStats.highestScore, score);
-    console.log("wowwww  "+userStats.highestScore);
-
    
 
     // Save updated user statistics to local storage
@@ -133,7 +128,6 @@ function endGame() {
     bird.style.top = '50%';
     bird.style.left = '50px';
     printLocalStorage();
-
 }
 
 

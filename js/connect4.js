@@ -17,6 +17,7 @@ function check(player) {
             for (j = 1; j <= 3; j++) {
                 if (document.getElementById(`c${i}r${j}`).style.backgroundColor == `${player}` && document.getElementById(`c${i}r${j + 1}`).style.backgroundColor == `${player}` && document.getElementById(`c${i}r${j + 2}`).style.backgroundColor == `${player}` && document.getElementById(`c${i}r${j + 3}`).style.backgroundColor == `${player}`) {
                     alert(`${player} wins`)
+                    update()
                     location.reload()
                 }
 
@@ -27,6 +28,7 @@ function check(player) {
             for (j = 1; j <= 4; j++) {
                 if (document.getElementById(`c${j}r${i}`).style.backgroundColor == `${player}` && document.getElementById(`c${j + 1}r${i}`).style.backgroundColor == `${player}` && document.getElementById(`c${j + 2}r${i}`).style.backgroundColor == `${player}` && document.getElementById(`c${j + 3}r${i}`).style.backgroundColor == `${player}`) {
                     alert(`${player} wins`)
+                    update()
                     location.reload()
                 }
 
@@ -38,6 +40,7 @@ function check(player) {
             for (j = 1; j <= 3; j++) {
                 if (document.getElementById(`c${i}r${j}`).style.backgroundColor == `${player}` && document.getElementById(`c${i + 1}r${j + 1}`).style.backgroundColor == `${player}` && document.getElementById(`c${i + 2}r${j + 2}`).style.backgroundColor == `${player}` && document.getElementById(`c${i + 3}r${j + 3}`).style.backgroundColor == `${player}`) {
                     alert(`${player} wins`)
+                    update()
                     location.reload()
                 }
 
@@ -48,6 +51,7 @@ function check(player) {
             for (j = 6; j >= 4; j--) {
                 if (document.getElementById(`c${i}r${j}`).style.backgroundColor == `${player}` && document.getElementById(`c${i + 1}r${j - 1}`).style.backgroundColor == `${player}` && document.getElementById(`c${i + 2}r${j - 2}`).style.backgroundColor == `${player}` && document.getElementById(`c${i + 3}r${j - 3}`).style.backgroundColor == `${player}`) {
                     alert(`${player} wins`)
+                    update()
                     location.reload()
                 }
 
@@ -89,5 +93,19 @@ document.querySelectorAll(".column").forEach((e) => {
 
     })
 })
+function  update()
+{
+    let username  = localStorage.getItem("currentUser");
+    var userStats2 = JSON.parse(localStorage.getItem(username)) || {};
+    userStats2.lastPlayed2 = new Date().toLocaleString();
+    if (!userStats2.hasOwnProperty('plays2')) {
+        userStats2.plays2=0;
+    }
+    //Update user statistics
+    userStats2.plays2++;
+   
+    // Save updated user statistics to local storage
+    localStorage.setItem(username, JSON.stringify(userStats2));
 
+}
 

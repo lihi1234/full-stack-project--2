@@ -3,16 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="" href="../html/nav.html"> 
+
+
     <title>Login Form</title>
+
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-image: url("../images/picback.jpg");
             margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         form {
@@ -37,16 +41,25 @@
         }
 
         button {
-            background-color: #4caf50;
-            color: #fff;
+            background-color: white;
+            color: brown;
+            font-size: 20px;
             padding: 10px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
             width: 100%;
         }
+        #message
+        {
+            display: none;
+            font-size: 40px;
+            color: white;
+        }
+       
     </style>
 </head>
+
 <body>
 
 <form id="loginForm">
@@ -57,10 +70,18 @@
     <input type="password" id="password" name="password" required>
 
     <button type="button" onclick="validateLogin()">Log In</button>
+
 </form>
+<div id="message">נחסמת, המתן 3 דקות</div>
+
 
 <script>
-    function validateLogin() {
+    console.log("hi")
+    let trys=0;
+    function validateLogin()
+    {
+        let f = document.getElementById("loginForm");
+        var messageElement = document.getElementById('message');
         var username = document.getElementById('username').value;
         var password = document.getElementById('password').value;
 
@@ -69,7 +90,6 @@
             alert('Password must have at least 4 characters');
             return;
         }
-
         // Check if the user has signed up
         var storedUserData = localStorage.getItem(username);
 
@@ -80,12 +100,24 @@
             if (password === userData.password) {
                 localStorage.setItem("currentUser", username);
                 alert('Login successful!');
+                window.location.href = "games.html";
                 // You can redirect to another page or perform additional actions here
             } else {
                 alert('Invalid password. Please try again.');
+                trys++;
             }
         } else {
             alert('User not found. Please sign up.');
+            trys++;
+        }
+        if(trys>=5)
+        {
+            f.style.display='none';
+            alert("you are block for 3 minutes")
+            messageElement.style.display = 'block'; // הצגת ההודעה
+            setTimeout(function() {
+                window.location.href = 'welcome.html';}, 180000); // 180000 מייצג 3 דקות במילי-שניות (60 שניות * 3)
+
         }
     }
 </script>

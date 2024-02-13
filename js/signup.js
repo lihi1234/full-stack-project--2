@@ -36,15 +36,28 @@ function validateForm() {
         alert('Invalid phone number. Please enter a 10-digit number.');
         return;
     }
+    // קרא את הנתונים מ־Local Storage
+var data = JSON.parse(localStorage.getItem('ora'));
+
+// עכשיו שנתונים נראים תקינים, תוכל להשתמש ב־removeItem כדי למחוק את הנתונים
+localStorage.removeItem('ora');
+
 
     // Additional validation checks (you can customize this part based on your requirements)
-    localStorage.setItem(username, JSON.stringify({ username: username ,password :password}));
-
+        //Update user statistics
+     localStorage.setItem(username, JSON.stringify({ username: username ,password :password}));
+     var userStats = JSON.parse(localStorage.getItem(username)) || {};
+     userStats.plays=0;
+     userStats.highestScore=0;
+     userStats.plays2=0;
+     userStats.lastPlayed2 = null;
+     localStorage.setItem(username, JSON.stringify(userStats));
+     printLocalStorage();
     // If all validation passes, you can submit the form or perform other actions
     alert('Sign up successful!\nUsername: ' + username + '\nEmail: ' + email + '\nPhone: ' + phone);
 
 }
-printLocalStorage();
+
 function printLocalStorage() {
     for (var i = 0; i < localStorage.length; i++) {
         var key = localStorage.key(i);
