@@ -39,3 +39,9 @@ button {
     cursor: pointer;
     width: 100%;
 }
+a
+{
+ position:fixed;
+ top:10px;
+ left: 10px;
+}

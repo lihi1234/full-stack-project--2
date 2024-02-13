@@ -36,15 +36,6 @@ function validateForm() {
         alert('Invalid phone number. Please enter a 10-digit number.');
         return;
     }
-    // קרא את הנתונים מ־Local Storage
-var data = JSON.parse(localStorage.getItem('ora'));
-
-// עכשיו שנתונים נראים תקינים, תוכל להשתמש ב־removeItem כדי למחוק את הנתונים
-localStorage.removeItem('ora');
-
-
-    // Additional validation checks (you can customize this part based on your requirements)
-        //Update user statistics
      localStorage.setItem(username, JSON.stringify({ username: username ,password :password}));
      var userStats = JSON.parse(localStorage.getItem(username)) || {};
      userStats.plays=0;

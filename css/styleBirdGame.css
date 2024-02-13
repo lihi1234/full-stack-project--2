@@ -70,6 +70,7 @@ body, html {
     background-image: url(../images/candy.png);
 
 }
+
 /*at 0%, the element remains unchanged; at 50%, it moves upward by 50 pixels and becomes fully opaque; and at 100%, it moves further upward by 100 pixels and fades out completely.*/
 @keyframes candyAnimation {
     0% {
@@ -92,4 +93,10 @@ body, html {
     width: 40px;
     height: 40px;
     background-image: url(../images/bomb.png);
+}
+a
+{
+ position:fixed;
+ top:10px;
+ left: 10px;
 }
