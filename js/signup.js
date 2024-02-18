@@ -24,21 +24,25 @@ function saveUserData() {
         return;
     }
 
-    // Save user data in a cookie if rememberMe is checked
-    if (rememberMe) {
-        var userData = {
-            username: username,
-            email: email,
-            password: password,
-            phone: phone
-        };
-        var now = new Date();
-        var expirationTime = new Date(now.getTime() + 30 * 60 * 1000); // 30 minutes in milliseconds
-        document.cookie = 'userData=' + JSON.stringify(userData)+ '; expires=' + expirationTime.toUTCString();
+    // Phone number validation
+    var phoneRegex = /^\d{10}$/;
+    if (!phoneRegex.test(phone)) {
+        alert('Invalid phone number. Please enter a 10-digit number.');
+        return;
     }
 
-    alert('Sign up successful!');
-    window.open('C:\Users\\97254\Documents\full stack project #2\full stack project #2\html\games.html' , '_blank');
-    
-    //\nUsername: ' + username + '\nEmail: ' + email + '\nPhone: ' + phone);
+    // Additional validation checks (you can customize this part based on your requirements)
+    localStorage.setItem(username, JSON.stringify({ username: username ,password :password}));
+
+    // If all validation passes, you can submit the form or perform other actions
+    alert('Sign up successful!\nUsername: ' + username + '\nEmail: ' + email + '\nPhone: ' + phone);
+
+}
+printLocalStorage();
+function printLocalStorage() {
+    for (var i = 0; i < localStorage.length; i++) {
+        var key = localStorage.key(i);
+        var value = localStorage.getItem(key);
+        console.log(key + ': ' + value);
+    }
 }

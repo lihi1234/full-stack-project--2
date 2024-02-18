@@ -100,7 +100,8 @@
 
 /*Services Section*/
 .services{
-    background: #131313;
+    background-image: url(../images/picback.jpg);
+    
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -111,7 +112,7 @@
     flex: 1 1 30rem;
     box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .1);
     border-radius: .5rem;
-    border: .1rem solid rgba(0, 0, 0, .1);
+    border: .1rem solid white;
     position: relative;
 }
 .services .box .image{
@@ -121,7 +122,7 @@
     overflow: hidden;
 }
 .services .box .image img{
-    height: 25rem;
+    height: 20rem;
 }
 .services .box:hover .image img{
     transform: scale(1.1);

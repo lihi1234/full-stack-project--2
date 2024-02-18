@@ -3,51 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>User Data and Leaderboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: white;
+            margin: 0;
+            padding: 20px;
+            align-items: center;
+            background-image: url(../images/picback.jpg);
+            background-repeat: no-repeat; 
+            background-size: cover; 
+
+            
+        }
+
+        #userData, #leaderboard {
+            /*background-color: #fff; */
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid white;
+            padding: 8px;
+            text-align: center;
+        }
+        a
+        {
+            position:fixed;
+            top:10px;
+            left: 10px;
+
+        }
+
+    </style>
 </head>
 <body>
-    <!-- יצירת אלמנט div עם ה־id 'userData' -->
+    <a href="../html/games.html"><img src="../images/home.jpeg" width="25px"></a>
     <div id="userData"></div>
-       <!-- יצירת אלמנט div עם ה־id 'leaderboard' -->
-       <div id="leaderboard">
-        <!-- טבלת המובילים תיווצר כאן -->
-    </div>
+    <div id="leaderboard"></div>
     <script>
-        let username  = localStorage.getItem("currentUser");
+        let username = localStorage.getItem("currentUser");
+        localStorage.removeItem("currentUser");
         showUserData();
         showLeaderboard();
+
         function showUserData() {
-            var userData = JSON.parse(localStorage.getItem(username)) || {}; // מידע על המשתמש הנוכחי
+            var userData = JSON.parse(localStorage.getItem(username)) || {};
             var plays = userData.plays || 'N/A';
             var lastPlayed = userData.lastPlayed || 'N/A';
             var highestScore = userData.highestScore || 'N/A';
+            var plays2 = userData.plays2 || 'N/A';
+            var lastPlayed2 = userData.lastPlayed2 || 'N/A';
 
-            document.getElementById("userData").innerHTML = '<h2 style="color: black;">' + username + ' Data</h2>' +
-                '<p>Plays: ' + plays + '</p>' +
-                '<p>Last Played: ' + lastPlayed + '</p>' +
-                '<p>Highest Score: ' + highestScore + '</p>';
+            document.getElementById("userData").innerHTML = '<h2>' + username + ' Data</h2>' +
+                '<p>Flying Bird Plays: ' + plays + '</p>' +
+                '<p>Flying Bird Last Played: ' + lastPlayed + '</p>' +
+                '<p>Flying Bird Highest Score: ' + highestScore + '</p>' +
+                '<p>Four in a Row Plays: ' + plays2 + '</p>' +
+                '<p>Four in a Row Last Played: ' + lastPlayed2 + '</p>';
         }
-        function showLeaderboard() {
-            // קבלת כל הנתונים מה local storage
-            let allUserData;
-            for (var i = 0; i < localStorage.length; i++) {
-        allUserData.push({username: localStorage.getItem(username), highestScore: localStorage.getItem(highestScore) })
-    }
 
-            // מיון הנתונים לפי הניקוד הגבוה ביותר
+        function showLeaderboard() {
+            var allUserData = Object.keys(localStorage).map(function(key) {
+                return JSON.parse(localStorage.getItem(key));
+            });
+
             allUserData.sort(function(a, b) {
                 return b.highestScore - a.highestScore;
             });
 
-            // בניית טבלת המובילים
-            var leaderboardTable = '<h2 style="color: black;">Leaderboard</h2><table style="border-collapse: collapse; width: 100%;"><tr><th style="border: 1px solid black; padding: 8px;">שם משתמש</th><th style="border: 1px solid black; padding: 8px;">הניקוד הכי גבוה</th></tr>';
-            for (var i = 0; i < Math.min(5, allUserData.length); i++) {
-                leaderboardTable += '<tr><td style="border: 1px solid black; padding: 8px;">' + allUserData[i].username + '</td><td style="border: 1px solid black; padding: 8px;">' + allUserData[i].highestScore + '</td></tr>';
+            var leaderboardTable = '<h2>Top Ten of Flying Bird Game</h2><table><tr><th>Username</th><th>Highest Score</th></tr>';
+            for (var i = 0; i < Math.min(10, allUserData.length); i++) {
+                leaderboardTable += '<td>' + allUserData[i].username + '</td><td>' + allUserData[i].highestScore + '</td></tr>';
             }
             leaderboardTable += '</table>';
 
-            // הכנסת הטבלה לתוך האלמנט שיש לנו בדף
             document.getElementById('leaderboard').innerHTML = leaderboardTable;
+            localStorage.setItem("currentUser", username);
         }
     </script>
 </body>

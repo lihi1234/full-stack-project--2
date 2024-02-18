@@ -5,6 +5,7 @@
 body{
     display: grid;
     place-items: center;
+    background-image: url("../images/picback.jpg");
 }
 
 h1{
@@ -22,8 +23,6 @@ h2{
     border: 2px solid black;
    width: 630px;
    background-color: rgb(74, 74, 198);
-    
-  
 }
 
 ul{
@@ -46,6 +45,12 @@ ul:hover{
     background-color: rgb(98, 136, 238);
 }
 
+a
+{
+ position:fixed;
+ top:10px;
+ left: 10px;
+}
 
 @media(max-width:700px){
     .board{

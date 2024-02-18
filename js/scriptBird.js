@@ -93,9 +93,7 @@ function moveBird(side) {
        
     }
 }
-localStorage.removeItem("ddd");
 let username  = localStorage.getItem("currentUser");
-//localStorage.setItem("naama", JSON.stringify({ username: "naama" ,password :"897"}));
 // End game function
 function endGame() {
     clearInterval(intervalLeft);
@@ -107,20 +105,15 @@ function endGame() {
     level = 1; //initialize the level value
     fallSpeed = 3; //initialize the fallSpeed value
 
-    // Retrieve user statistics from local storage or set default values
-   // var username = document.getElementById('username').value;
-   // var userStats = JSON.parse(localStorage.getItem(username)) || { plays: 0, lastPlayed: null, highestScore: 0 };
     var userStats = JSON.parse(localStorage.getItem(username)) || {};
     userStats.lastPlayed = new Date().toLocaleString();
     if (!userStats.hasOwnProperty('plays')) {
         userStats.plays=0;
         userStats.highestScore=0;
     }
-        //Update user statistics
+    //Update user statistics
     userStats.plays++;
     userStats.highestScore = Math.max(userStats.highestScore, score);
-    console.log("wowwww  "+userStats.highestScore);
-
    
 
     // Save updated user statistics to local storage
@@ -132,13 +125,8 @@ function endGame() {
     // Reset bird position
     bird.style.top = '50%';
     bird.style.left = '50px';
-    printLocalStorage();
-
 }
 
-
-
-   
 //A function to create the spikes in the walls
 function createSpikes(className, side) {
     for (let i=0; i < numSpikes; i++) {
@@ -157,7 +145,6 @@ function spikes() {
     gameContainer.appendChild(candy);
 }
     
-   // הגדרת מערך ריק לשמירת מיקומי הפצצות
    var bombs = [];
    for (var i = 0; i < 5; i++) {
    var bombElement = document.createElement('div');
@@ -192,10 +179,7 @@ function generateSpikes(className) {
     }
 }
 
-
 function boom() {
-  
-    // גרילת מיקומי הפצצות
     for (var i = 0; i < 5; i++) {
         var b = Math.floor(Math.random() * (gameContainer.offsetHeight - 80) + 40);
         var l = Math.floor(Math.random() * (gameContainer.offsetWidth - 130) + 65);
@@ -205,7 +189,6 @@ function boom() {
     }
 
 }
-
 
 function bonus()
 {
@@ -234,9 +217,8 @@ function checkCollisionWith(rect,foo) {
 }
 function CollisionWithCandy()
 {
-     // הנגיעה בממתק
-     score++; // הוספת ניקוד
-     scoreDisplay.textContent = score; // עדכון התצוגה של הניקוד
+     score++; 
+     scoreDisplay.textContent = score; 
      done=true;
      animateCandy();
 }
@@ -247,29 +229,24 @@ function CollisionWithBomb()
 }
 
 
-
 function animateCandy() {
-    // הפעל אנימציה על הממתק
     candy.style.transition = 'bottom 2s ease-out';
-    candy.style.bottom = '150%'; // העלאת הממתק למעלה מהמסך
-
-    // כשהאנימציה מסתיימת, החזר את הממתק למצבו הרגיל
+    candy.style.bottom = '150%'; // bring the candy up the screen
+    // When the animation ends, return the candy to its normal state
     setTimeout(() => {
-        candy.style.transition = ''; // מחזיר את הממתק למצבו הרגיל שלו ללא אנימציה
-        candy.style.bottom = '-50px'; // חזרה של הממתק לתחתית המסך
-    }, 1000); // זמן של 1000 מילי-שניות (1 שנייה) לאחר התחלת האנימציה
+        candy.style.transition = ''; // Returns the candy to its normal non-animated state
+        candy.style.bottom = '-50px'; // Return of the candy to the bottom of the screen
+    }, 1000); // A second time after the animation starts
 }
 
 
 function checkCollision() {
-
-   const birdRect = bird.getBoundingClientRect(); // קבלת גבולות האלמנט ברקע של המסך
-    const candyRect = candy.getBoundingClientRect(); // קבלת גבולות האלמנט ברקע של המסך
+   const birdRect = bird.getBoundingClientRect(); 
+    const candyRect = candy.getBoundingClientRect(); 
     document.querySelectorAll('.spike-right').forEach(spike => {
-        const spikeRectRight = spike.getBoundingClientRect(); // קבלת גבולות המשולש ברקע של המסך
-        if (spike.style.display === 'block') { // רק אם המשולש במצב תצוגה
+        const spikeRectRight = spike.getBoundingClientRect(); 
+        if (spike.style.display === 'block') { 
             if (birdRect.right >= spikeRectRight.left) {
-                // כאן תוכל להוסיף פעולות נוספות כמו הפסקת המשחק וכו'
                 if((birdRect.top <= spikeRectRight.top&&birdRect.bottom >= spikeRectRight.top)||(birdRect.top <= spikeRectRight.bottom &&birdRect.bottom >= spikeRectRight.bottom )||(birdRect.top >= spikeRectRight.top &&birdRect.bottom <= spikeRectRight.bottom ))
                 {
                     endGame();
@@ -279,11 +256,10 @@ function checkCollision() {
     
     });
     document.querySelectorAll('.spike-left').forEach(spike => {
-        const spikeRectLeft = spike.getBoundingClientRect(); // קבלת גבולות המשולש ברקע של המסך
-        if (spike.style.display === 'block') { // רק אם המשולש במצב תצוגה
+        const spikeRectLeft = spike.getBoundingClientRect(); 
+        if (spike.style.display === 'block') { 
 
             if (birdRect.left <= spikeRectLeft.right) {
-                // כאן תוכל להוסיף פעולות נוספות כמו הפסקת המשחק וכו'
                 if((birdRect.top <= spikeRectLeft.top&&birdRect.bottom >= spikeRectLeft.top)||(birdRect.top <= spikeRectLeft.bottom &&birdRect.bottom >= spikeRectLeft.bottom )||(birdRect.top >= spikeRectLeft.top &&birdRect.bottom <= spikeRectLeft.bottom ))
                 {
                     endGame();
@@ -292,19 +268,16 @@ function checkCollision() {
         }
 
     });
-    checkCollisionWith(candyRect, CollisionWithCandy); // בדיקת התנגשות עם הממתק
+    checkCollisionWith(candyRect, CollisionWithCandy); 
     done=false;
     bombs.forEach(element => { checkCollisionWith(element.getBoundingClientRect(), CollisionWithBomb);
     done=false;
     });
-       
-    }
-    let isPaused = false;
+}
+let isPaused = false;
     
-    // פונקציה שמתבצעת כאשר לוחצים על הכפתור
     function Pause() {
         if (isPaused) {
-            // אם המשחק היה עצור, תמשיך אותו
             if(sidee=="left"){
                 intervalLeft = setInterval(() => moveBird(sidee), 50);
             }
@@ -313,21 +286,10 @@ function checkCollision() {
                 intervalRight = setInterval(() => moveBird(sidee), 50);
             }
         } else {
-            // אם המשחק היה ממשיך, עצור אותו
             clearInterval(intervalLeft);
             clearInterval(intervalRight);
         }
-        // שנה את המצב של המשחק (עצור או ממשיך)
         isPaused = !isPaused;
     }
    
-    // הדפסת כל המשתנים שנשמרו ב-LocalStorage
-function printLocalStorage() {
-    for (var i = 0; i < localStorage.length; i++) {
-        var key = localStorage.key(i);
-        var value = localStorage.getItem(key);
-        console.log(key + ': ' + value);
-    }
-}
-
-// קריאה לפונקציה להדפסת הנתונים ב-LocalStorage
+  
