@@ -52,6 +52,10 @@ function saveUserData() {
     // If all validation passes, you can submit the form or perform other actions
     alert('Sign up successful!\nUsername: ' + username + '\nEmail: ' + email + '\nPhone: ' + phone);
     localStorage.setItem("currentUser", username);
+     var userStats = JSON.parse(localStorage.getItem(username)) || {};
+     userStats.plays=0;
+     userStats.highestScore=0;
+    localStorage.setItem(username, JSON.stringify(userStats));
     window.location.href = "games.html";
 
 }
