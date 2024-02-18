@@ -31,8 +31,23 @@ function saveUserData() {
         return;
     }
 
+
+    if (rememberMe) {
+        var userData = {
+            username: username,
+            email: email,
+            password: password,
+            phone: phone
+        };
+        var now = new Date();
+        var expirationTime = new Date(now.getTime() + 30 * 60 * 1000); // 30 minutes in milliseconds
+        document.cookie = 'userData=' + JSON.stringify(userData)+ '; expires=' + expirationTime.toUTCString();
+    }
+
     // Additional validation checks (you can customize this part based on your requirements)
     localStorage.setItem(username, JSON.stringify({ username: username ,password :password}));
+
+    
 
     // If all validation passes, you can submit the form or perform other actions
     alert('Sign up successful!\nUsername: ' + username + '\nEmail: ' + email + '\nPhone: ' + phone);
