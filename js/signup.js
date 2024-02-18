@@ -36,6 +36,7 @@ function saveUserData() {
 
     // If all validation passes, you can submit the form or perform other actions
     alert('Sign up successful!\nUsername: ' + username + '\nEmail: ' + email + '\nPhone: ' + phone);
+    window.location.href = "games.html";
 
 }
 printLocalStorage();

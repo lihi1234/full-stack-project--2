@@ -18,6 +18,7 @@ function validateLogin() {
         if (password === userData.password) {
             localStorage.setItem("currentUser", username);
             alert('Login successful!');
+            window.location.href = "games.html";
             // You can redirect to another page or perform additional actions here
         } else {
             alert('Invalid password. Please try again.');
@@ -25,4 +26,5 @@ function validateLogin() {
     } else {
         alert('User not found. Please sign up.');
     }
+    
 }

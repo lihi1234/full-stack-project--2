@@ -1,13 +1,12 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-image: url("../images/picback.jpg");
     margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-
 form {
     background-color: #fff;
     padding: 20px;
@@ -16,25 +15,36 @@ form {
     width: 300px;
     text-align: center;
 }
-
 label {
     display: block;
     margin-bottom: 8px;
 }
-
 input {
     width: 100%;
     padding: 8px;
     margin-bottom: 16px;
     box-sizing: border-box;
 }
-
 button {
-    background-color: #4caf50;
-    color: #fff;
+    background-color: white;
+    color: brown;
+    font-size: 20px;
     padding: 10px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     width: 100%;
+}
+#message
+{
+    display: none;
+    font-size: 40px;
+    color: white;
+}
+
+a
+{
+position:fixed;
+top:10px;
+left: 10px;
 }
