@@ -23,7 +23,6 @@ function validateLogin() {
             localStorage.setItem("currentUser", username);
             alert('Login successful!');
             window.location.href = "games.html";
-            // You can redirect to another page or perform additional actions here
         } else {
             trys++;
             alert('Invalid password. Please try again.');
