@@ -85,7 +85,7 @@
             });
 
             var leaderboardTable = '<h2>Top Ten of Flying Bird Game</h2><table><tr><th>Username</th><th>Highest Score</th></tr>';
-            for (var i = 0; i < Math.min(10, allUserData.length); i++) {
+            for (var i = 0; i < Math.min(5, allUserData.length); i++) {
                 leaderboardTable += '<td>' + allUserData[i].username + '</td><td>' + allUserData[i].highestScore + '</td></tr>';
             }
             leaderboardTable += '</table>';
